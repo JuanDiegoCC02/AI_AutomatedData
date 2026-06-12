@@ -10,9 +10,13 @@ class Document(models.Model):
 
     total_characters = models.IntegerField()
 
-    total_chunks = models.IntegerField(default=0)
+    total_chunks = models.IntegerField()
 
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    processing_time = models.FloatField()
+
+    status = models.CharField(max_length=50)
 
     def __str__(self):
         return self.filename

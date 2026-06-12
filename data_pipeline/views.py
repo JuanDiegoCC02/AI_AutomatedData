@@ -12,7 +12,7 @@ from .services.embeddings import generate_embeddings
 from .services.vector_store import collection
 from .services.search_service import semantic_search
 from drf_spectacular.utils import extend_schema
-
+from .serializers import SearchSerializer   
 
 
 # Create your views here.
@@ -63,6 +63,7 @@ class UploadDocumentView(APIView):
 
             collection.add(
                 ids=[str(uuid.uuid4())],
+                embeddings=[embeddings[index].tolist()],
                 documents=[chunk],
                 metadatas=[{
                     "document_id": document.id,
@@ -78,12 +79,22 @@ class UploadDocumentView(APIView):
 
 
 
+@extend_schema(
+    request=SearchSerializer,
+    responses={200: dict}
+)
 class SearchView(APIView):
 
     def post(self, request):
+
         query = request.data.get("query")
+
         if not query:
-            return Response({"error": "No query provided"}, status=400)
+            return Response(
+                {"error": "No query provided"},
+                status=400
+            )
 
         results = semantic_search(query)
+
         return Response(results)
