@@ -12,8 +12,11 @@ from .services.embeddings import generate_embeddings
 from .services.vector_store import collection
 from .services.search_service import semantic_search
 from drf_spectacular.utils import extend_schema
-from .serializers import SearchSerializer   
-
+import time
+from .serializers import (
+    SearchSerializer,
+    DocumentSerializer
+)
 
 # Create your views here.
 
@@ -37,6 +40,8 @@ class UploadDocumentView(APIView):
 
     def post(self, request):
 
+        start_time = time.time()
+
         if "file" not in request.FILES:
             return Response(
                 {"error": "No file provided"},
@@ -53,10 +58,17 @@ class UploadDocumentView(APIView):
 
         embeddings = generate_embeddings(chunks)
 
+        processing_time = round(
+            time.time() - start_time,
+            2
+        )
+
         document = Document.objects.create(
             filename=file.name,
             total_characters=len(cleaned_text),
-            total_chunks=len(chunks)
+            total_chunks=len(chunks),
+            processing_time=processing_time,
+            status="COMPLETED"
         )
 
         for index, chunk in enumerate(chunks):
@@ -98,3 +110,20 @@ class SearchView(APIView):
         results = semantic_search(query)
 
         return Response(results)
+    
+
+
+class DocumentListView(APIView):
+
+    def get(self, request):
+
+        documents = Document.objects.all().order_by(
+            "-uploaded_at"
+        )
+
+        serializer = DocumentSerializer(
+            documents,
+            many=True
+        )
+
+        return Response(serializer.data)
