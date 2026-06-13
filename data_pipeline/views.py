@@ -19,6 +19,7 @@ from .serializers import (
 )
 from .services.quality_service import calculate_quality
 from django.db.models import Avg, Sum
+from .services.language_detector import (detect_language)
 
 # Create your views here.
 
@@ -56,6 +57,8 @@ class UploadDocumentView(APIView):
 
         cleaned_text = clean_text(text)
 
+        language = detect_language(cleaned_text)
+
         chunks = chunk_text(cleaned_text)
 
         quality_data = calculate_quality(
@@ -74,9 +77,10 @@ class UploadDocumentView(APIView):
             total_characters=len(cleaned_text),
             total_chunks=len(chunks),
             processing_time=processing_time,
-            status="COMPLETED",
             quality_score=quality_data["quality_score"],
-            duplicate_chunks=quality_data["duplicate_chunks"]
+            duplicate_chunks=quality_data["duplicate_chunks"],
+            language=language,
+            status="COMPLETED"
         )
 
         for index, chunk in enumerate(chunks):
