@@ -17,6 +17,7 @@ from .serializers import (
     SearchSerializer,
     DocumentSerializer
 )
+from .services.quality_service import calculate_quality
 
 # Create your views here.
 
@@ -56,6 +57,10 @@ class UploadDocumentView(APIView):
 
         chunks = chunk_text(cleaned_text)
 
+        quality_data = calculate_quality(
+            chunks
+        )
+
         embeddings = generate_embeddings(chunks)
 
         processing_time = round(
@@ -68,7 +73,9 @@ class UploadDocumentView(APIView):
             total_characters=len(cleaned_text),
             total_chunks=len(chunks),
             processing_time=processing_time,
-            status="COMPLETED"
+            status="COMPLETED",
+            quality_score=quality_data["quality_score"],
+            duplicate_chunks=quality_data["duplicate_chunks"]
         )
 
         for index, chunk in enumerate(chunks):
