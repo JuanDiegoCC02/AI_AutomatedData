@@ -1,6 +1,6 @@
 from django.urls import path
 
-from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView
+from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView
 
 # Create your urls here.
 
@@ -20,6 +20,12 @@ urlpatterns = [
         path(
         "documents/",
         DocumentListView.as_view()
+    ),
+
+        path(
+        "stats/",
+        StatsView.as_view(),
+        name="stats"
     ),
 
 

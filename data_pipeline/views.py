@@ -18,6 +18,7 @@ from .serializers import (
     DocumentSerializer
 )
 from .services.quality_service import calculate_quality
+from django.db.models import Avg, Sum
 
 # Create your views here.
 
@@ -134,3 +135,29 @@ class DocumentListView(APIView):
         )
 
         return Response(serializer.data)
+    
+
+    
+class StatsView(APIView):
+    def get(self, request):
+        documents = Document.objects.count()
+
+        total_chunks = (
+            Document.objects.aggregate(
+                total=Sum("total_chunks")
+            )["total"]
+            or 0
+        )
+
+        average_quality = (
+            Document.objects.aggregate(
+                avg=Avg("quality_score")
+            )["avg"]
+            or 0
+        )
+
+        return Response({
+            "documents": documents,
+            "total_chunks": total_chunks,
+            "average_quality": round(average_quality, 2)
+        })  

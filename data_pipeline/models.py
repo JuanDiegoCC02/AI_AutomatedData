@@ -10,24 +10,19 @@ class Document(models.Model):
 
     total_characters = models.IntegerField()
 
-    total_chunks = models.IntegerField()
+    total_chunks = models.IntegerField(default=0)
 
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    processing_time = models.FloatField()
-
-    status = models.CharField(max_length=50)
+    processing_time = models.FloatField(default=0)
 
     quality_score = models.FloatField(default=0)
 
-    language = models.CharField(
-        max_length=20,
-        default="unknown"
-    )
+    duplicate_chunks = models.IntegerField(default=0)
 
-    duplicate_chunks = models.IntegerField(
-        default=0
-    )
+    language = models.CharField(max_length=20, default="unknown")
+
+    status = models.CharField(max_length=50, default="COMPLETED")
+
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.filename
