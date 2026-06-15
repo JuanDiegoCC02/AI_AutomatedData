@@ -53,6 +53,8 @@ class UploadDocumentView(APIView):
 
         file = request.FILES["file"]
 
+        file_size = file.size
+
         text = extract_text(file)
 
         cleaned_text = clean_text(text)
@@ -80,7 +82,8 @@ class UploadDocumentView(APIView):
             quality_score=quality_data["quality_score"],
             duplicate_chunks=quality_data["duplicate_chunks"],
             language=language,
-            status="COMPLETED"
+            status="COMPLETED",
+            file_size=file_size
         )
 
         for index, chunk in enumerate(chunks):
