@@ -1,6 +1,6 @@
 from django.urls import path
 
-from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView, QualityReportView
+from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView, QualityReportView, DashboardView
 
 # Create your urls here.
 
@@ -34,5 +34,10 @@ urlpatterns = [
         name="quality-report"
     ),
 
+        path(
+        "dashboard/",
+        DashboardView.as_view(),
+        name="dashboard"
+        )
 
 ]
