@@ -110,6 +110,8 @@ class UploadDocumentView(APIView):
     request=SearchSerializer,
     responses={200: dict}
 )
+
+
 class SearchView(APIView):
 
     def post(self, request):
@@ -124,7 +126,13 @@ class SearchView(APIView):
 
         results = semantic_search(query)
 
-        return Response(results)
+        documents = results["documents"][0]
+
+        return Response({
+            "query": query,
+            "best_match": documents[0],
+            "total_results": len(documents)
+        })
     
 
 
