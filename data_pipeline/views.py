@@ -268,4 +268,34 @@ class QualityReportView(APIView):
             "languages": dict(languages)
         })
     
+
+
+class DashboardView(APIView):
+
+    def get(self, request):
+
+        return Response({
+
+            "documents":
+            Document.objects.count(),
+
+            "completed":
+            Document.objects.filter(
+                status="COMPLETED"
+            ).count(),
+
+            "failed":
+            Document.objects.filter(
+                status="FAILED"
+            ).count(),
+
+            "languages":
+            list(
+                Document.objects.values_list(
+                    "language",
+                    flat=True
+                ).distinct()
+            )
+        })
+    
     
