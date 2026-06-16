@@ -298,4 +298,22 @@ class DashboardView(APIView):
             )
         })
     
-    
+
+
+class TopDocumentsView(APIView):
+
+    def get(self, request):
+
+        documents = (
+            Document.objects
+            .order_by("-quality_score")[:5]
+        )
+
+        serializer = DocumentSerializer(
+            documents,
+            many=True
+        )
+
+        return Response(
+            serializer.data
+        )
