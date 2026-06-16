@@ -1,6 +1,6 @@
 from django.urls import path
 
-from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView
+from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView, QualityReportView
 
 # Create your urls here.
 
@@ -26,6 +26,12 @@ urlpatterns = [
         "stats/",
         StatsView.as_view(),
         name="stats"
+    ),
+
+        path(
+        "quality-report/",
+        QualityReportView.as_view(),
+        name="quality-report"
     ),
 
 
