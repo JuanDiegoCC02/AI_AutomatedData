@@ -14,3 +14,14 @@ class DocumentSerializer(serializers.ModelSerializer):
 
 class SearchSerializer(serializers.Serializer):
     query = serializers.CharField()
+
+
+class StatsSerializer(serializers.Serializer):
+
+    documents = serializers.IntegerField()
+
+    total_chunks = serializers.IntegerField()
+
+    average_quality = serializers.FloatField()
+
+    
