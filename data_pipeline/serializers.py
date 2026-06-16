@@ -24,4 +24,15 @@ class StatsSerializer(serializers.Serializer):
 
     average_quality = serializers.FloatField()
 
-    
+
+class DashboardSerializer(serializers.Serializer):
+
+    documents = serializers.IntegerField()
+
+    completed = serializers.IntegerField()
+
+    failed = serializers.IntegerField()
+
+    languages = serializers.ListField(
+        child=serializers.CharField()
+    )
