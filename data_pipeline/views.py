@@ -13,13 +13,12 @@ from .services.vector_store import collection
 from .services.search_service import semantic_search
 from drf_spectacular.utils import extend_schema
 import time
-from .serializers import (
-    SearchSerializer,
-    DocumentSerializer
-)
+from .serializers import (SearchSerializer, DocumentSerializer)
 from .services.quality_service import calculate_quality
 from django.db.models import Avg, Sum
 from .services.language_detector import (detect_language)
+
+from .services.complexity_service import (calculate_complexity)
 
 # Create your views here.
 
@@ -59,6 +58,8 @@ class UploadDocumentView(APIView):
 
         cleaned_text = clean_text(text)
 
+        complexity_score = calculate_complexity(cleaned_text)
+
         language = detect_language(cleaned_text)
 
         chunks = chunk_text(cleaned_text)
@@ -77,6 +78,7 @@ class UploadDocumentView(APIView):
         document = Document.objects.create(
             filename=file.name,
             total_characters=len(cleaned_text),
+            complexity_score=complexity_score,
             total_chunks=len(chunks),
             processing_time=processing_time,
             quality_score=quality_data["quality_score"],
@@ -130,8 +132,10 @@ class SearchView(APIView):
 
         return Response({
             "query": query,
-            "best_match": documents[0],
-            "total_results": len(documents)
+            "best_match": results["documents"][0][0],
+            "document_id": results["metadatas"][0][0]["document_id"],
+            "distance": results["distances"][0][0],
+            "total_results": len(results["documents"][0])
         })
     
 
