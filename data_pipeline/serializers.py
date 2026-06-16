@@ -36,3 +36,17 @@ class DashboardSerializer(serializers.Serializer):
     languages = serializers.ListField(
         child=serializers.CharField()
     )
+
+
+class QualityReportSerializer(serializers.Serializer):
+
+    documents = serializers.IntegerField()
+
+    average_quality = serializers.FloatField()
+
+    total_duplicates = serializers.IntegerField()
+
+    languages = serializers.DictField()
+
+
+    
