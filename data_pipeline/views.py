@@ -28,6 +28,21 @@ from .services.search_service import semantic_search
 from .services.quality_service import calculate_quality
 from .services.language_detector import detect_language
 from .services.complexity_service import calculate_complexity
+from .services.question_answering import answer_question
+
+import transformers
+
+print("=" * 50)
+print("TRANSFORMERS VERSION:", transformers.__version__)
+print("TRANSFORMERS FILE:", transformers.__file__)
+print("=" * 50)
+
+from transformers.pipelines import PIPELINE_REGISTRY
+
+print(
+    PIPELINE_REGISTRY.get_supported_tasks()
+)
+
 
 # Create your views here.
 
@@ -164,6 +179,13 @@ class SearchView(APIView):
 
         results = semantic_search(query)
 
+        best_match = results["documents"][0][0]
+
+        answer = answer_question(
+            query,
+            best_match
+        )
+
         document_id = (
             results["metadatas"][0][0]["document_id"]
         )
@@ -174,13 +196,10 @@ class SearchView(APIView):
 
         return Response({
             "query": query,
-            "best_match": results["documents"][0][0],
+            "answer": answer,
             "document_id": document.id,
             "filename": document.filename,
-            "distance": results["distances"][0][0],
-            "total_results": len(
-                results["documents"][0]
-            )
+            "distance": results["distances"][0][0]
         })
     
 
