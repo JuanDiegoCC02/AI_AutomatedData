@@ -32,6 +32,7 @@ from .services.quality_service import calculate_quality
 from .services.language_detector import detect_language
 from .services.complexity_service import calculate_complexity
 from django.shortcuts import get_object_or_404
+from .pagination import DocumentPagination
 
 
 # Create your views here.
@@ -198,16 +199,25 @@ class DocumentListView(APIView):
 
     def get(self, request):
 
-        documents = Document.objects.all().order_by(
-            "-uploaded_at"
+        documents = (
+            Document.objects
+            .all()
+            .order_by("-uploaded_at")
+        )
+
+        paginator = DocumentPagination()
+
+        page = paginator.paginate_queryset(
+            documents,
+            request
         )
 
         serializer = DocumentSerializer(
-            documents,
+            page,
             many=True
         )
 
-        return Response(
+        return paginator.get_paginated_response(
             serializer.data
         )
     
