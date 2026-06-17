@@ -32,3 +32,28 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 .DS_Store
+
+# ChromaDB
+vector_db/
+
+# Virtual Environments
+venv/
+venv2/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/
+
+# Database
+db.sqlite3
+
+# Environment variables
+.env
+
+# Logs
+*.log

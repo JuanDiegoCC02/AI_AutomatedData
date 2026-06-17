@@ -31,7 +31,6 @@ from .services.search_service import semantic_search
 from .services.quality_service import calculate_quality
 from .services.language_detector import detect_language
 from .services.complexity_service import calculate_complexity
-from .services.question_answering import answer_question
 
 
 # Create your views here.
@@ -169,28 +168,30 @@ class SearchView(APIView):
 
         results = semantic_search(query)
 
-        best_match = results["documents"][0][0]
+        search_results = []
 
-        answer = answer_question(
-            query,
-            best_match
-        )
+        for i in range(
+            len(results["documents"][0])
+        ):
 
-        document_id = (
-            results["metadatas"][0][0]["document_id"]
-        )
+            metadata = results["metadatas"][0][i]
 
-        document = Document.objects.get(
-            id=document_id
-        )
+            document = Document.objects.get(
+                id=metadata["document_id"]
+            )
+
+            search_results.append({
+                "filename": document.filename,
+                "content": results["documents"][0][i],
+                "distance": results["distances"][0][i]
+            })
 
         return Response({
             "query": query,
-            "answer": answer,
-            "document_id": document.id,
-            "filename": document.filename,
-            "distance": results["distances"][0][0]
+            "results": search_results
         })
+
+ 
     
 
 
