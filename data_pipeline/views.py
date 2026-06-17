@@ -15,8 +15,11 @@ from drf_spectacular.utils import extend_schema
 from .models import Document
 
 from .serializers import (
+    DashboardSerializer,
+    QualityReportSerializer,
     SearchSerializer,
-    DocumentSerializer
+    DocumentSerializer,
+    StatsSerializer
 )
 
 from .services.extractor import extract_text
@@ -29,19 +32,6 @@ from .services.quality_service import calculate_quality
 from .services.language_detector import detect_language
 from .services.complexity_service import calculate_complexity
 from .services.question_answering import answer_question
-
-import transformers
-
-print("=" * 50)
-print("TRANSFORMERS VERSION:", transformers.__version__)
-print("TRANSFORMERS FILE:", transformers.__file__)
-print("=" * 50)
-
-from transformers.pipelines import PIPELINE_REGISTRY
-
-print(
-    PIPELINE_REGISTRY.get_supported_tasks()
-)
 
 
 # Create your views here.
@@ -222,7 +212,10 @@ class DocumentListView(APIView):
         )
     
 
-    
+
+@extend_schema(
+    responses=StatsSerializer
+)
 class StatsView(APIView):
 
     def get(self, request):
@@ -252,6 +245,9 @@ class StatsView(APIView):
     
 
 
+@extend_schema(
+    responses=QualityReportSerializer
+)
 class QualityReportView(APIView):
 
     def get(self, request):
@@ -288,7 +284,9 @@ class QualityReportView(APIView):
         })
     
 
-
+@extend_schema(
+    responses=DashboardSerializer
+)
 class DashboardView(APIView):
 
     def get(self, request):
