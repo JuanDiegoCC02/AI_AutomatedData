@@ -31,6 +31,7 @@ from .services.search_service import semantic_search
 from .services.quality_service import calculate_quality
 from .services.language_detector import detect_language
 from .services.complexity_service import calculate_complexity
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -332,3 +333,36 @@ class TopDocumentsView(APIView):
         return Response(
             serializer.data
         )
+    
+
+class DeleteDocumentView(APIView):
+
+    def delete(self, request, document_id):
+
+        document = get_object_or_404(
+            Document,
+            id=document_id
+        )
+
+        collection.delete(
+            where={
+                "document_id": document.id
+            }
+        )
+
+        chunks_deleted = (
+            document.total_chunks
+        )
+
+        filename = (
+            document.filename
+        )
+
+        document.delete()
+
+        return Response({
+            "message": "Document deleted successfully",
+            "document_id": document_id,
+            "filename": filename,
+            "chunks_deleted": chunks_deleted
+        })

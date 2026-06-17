@@ -1,6 +1,6 @@
 from django.urls import path
 
-from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView, QualityReportView, DashboardView, TopDocumentsView
+from data_pipeline.views import UploadDocumentView, SearchView, DocumentListView, StatsView, QualityReportView, DashboardView, TopDocumentsView, DeleteDocumentView
 
 # Create your urls here.
 
@@ -44,6 +44,12 @@ urlpatterns = [
         "top-documents/",
         TopDocumentsView.as_view(),
         name="top-documents"
+        ),
+
+        path(
+        "delete-document/<int:document_id>/",
+        DeleteDocumentView.as_view(),
+        name="delete-document"
         ),
 
 ]
