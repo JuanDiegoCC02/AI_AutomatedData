@@ -1,7 +1,7 @@
 
 # chunker.py
 
-def chunk_text(text, chunk_size=500):
+def chunk_text(text, chunk_size=100):
 
     words = text.split()
 

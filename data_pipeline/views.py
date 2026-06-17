@@ -193,8 +193,6 @@ class SearchView(APIView):
 
  
     
-
-
 class DocumentListView(APIView):
 
     def get(self, request):
@@ -316,7 +314,6 @@ class DashboardView(APIView):
             )
         })
     
-
 
 class TopDocumentsView(APIView):
 
