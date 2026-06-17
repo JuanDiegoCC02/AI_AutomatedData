@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "data_pipeline",
+    "django_filters",
 ]
 
 REST_FRAMEWORK = {
