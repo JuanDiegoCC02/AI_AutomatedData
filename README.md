@@ -95,6 +95,44 @@ The platform stores document vectors in ChromaDB and exposes a REST API for docu
 
 ---
 
+# 📄 API Documentation
+
+* Swagger UI: `/api/docs/`
+* OpenAPI Schema: `/api/schema/`
+* Redoc: `/api/redoc/`
+
+---
+
+# 🔍 Query Features
+
+### Pagination
+
+```http
+GET /api/documents/?page=1&page_size=5
+```
+
+### Filtering
+
+```http
+GET /api/documents/?language=es
+```
+
+```http
+GET /api/documents/?status=COMPLETED
+```
+
+### Ordering
+
+```http
+GET /api/documents/?ordering=-quality_score
+```
+
+```http
+GET /api/documents/?ordering=-uploaded_at
+```
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
