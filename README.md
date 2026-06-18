@@ -28,6 +28,17 @@ The platform stores document vectors in ChromaDB and exposes a REST API for docu
 
 ---
 
+# ⚙️ Tech Stack
+
+* Django REST Framework
+* ChromaDB
+* Sentence Transformers
+* LangDetect
+* NumPy
+* drf-spectacular (OpenAPI / Swagger)
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
