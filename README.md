@@ -39,6 +39,41 @@ The platform stores document vectors in ChromaDB and exposes a REST API for docu
 
 ---
 
+# 🧠 Core Features
+
+## Document Processing
+
+* PDF text extraction
+* Automatic text cleaning
+* Language detection
+* Complexity analysis
+* Chunk generation for large documents
+
+## Semantic Search
+
+* Vector embeddings generation
+* ChromaDB vector storage
+* Similarity-based document retrieval
+* Semantic document matching
+
+## Analytics & Reporting
+
+* Document quality scoring
+* Duplicate chunk detection
+* Processing statistics
+* Dashboard metrics
+* Language distribution reports
+
+## Document Management
+
+* Upload documents
+* List documents
+* Delete documents
+* Pagination support
+* Filtering and ordering
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
