@@ -9,7 +9,7 @@ from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
-
+from rest_framework.generics import ListAPIView
 
 from drf_spectacular.utils import extend_schema
 
@@ -195,32 +195,18 @@ class SearchView(APIView):
         })
 
  
-    
-class DocumentListView(APIView):
 
-    def get(self, request):
+class DocumentListView(ListAPIView):
 
-        documents = (
-            Document.objects
-            .all()
-            .order_by("-uploaded_at")
-        )
+    queryset = (
+        Document.objects
+        .all()
+        .order_by("-uploaded_at")
+    )
 
-        paginator = DocumentPagination()
+    serializer_class = DocumentSerializer
 
-        page = paginator.paginate_queryset(
-            documents,
-            request
-        )
-
-        serializer = DocumentSerializer(
-            page,
-            many=True
-        )
-
-        return paginator.get_paginated_response(
-            serializer.data
-        )
+    pagination_class = DocumentPagination
     
 
 
