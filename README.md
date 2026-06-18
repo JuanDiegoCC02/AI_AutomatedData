@@ -74,6 +74,27 @@ The platform stores document vectors in ChromaDB and exposes a REST API for docu
 
 ---
 
+# 📡 API Endpoints
+
+### Documents
+
+* POST `/api/upload/`
+* GET `/api/documents/`
+* DELETE `/api/delete-document/{id}/`
+
+### Search
+
+* POST `/api/search/`
+
+### Analytics
+
+* GET `/api/stats/`
+* GET `/api/dashboard/`
+* GET `/api/quality-report/`
+* GET `/api/top-documents/`
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
