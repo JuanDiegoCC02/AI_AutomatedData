@@ -13,6 +13,8 @@ from rest_framework.generics import ListAPIView
 
 from drf_spectacular.utils import extend_schema
 
+from data_pipeline.filters import DocumentFilter
+
 from .models import Document
 
 from .serializers import (
@@ -21,6 +23,10 @@ from .serializers import (
     SearchSerializer,
     DocumentSerializer,
     StatsSerializer
+)
+
+from django_filters.rest_framework import (
+    DjangoFilterBackend
 )
 
 from .services.extractor import extract_text
@@ -207,6 +213,12 @@ class DocumentListView(ListAPIView):
     serializer_class = DocumentSerializer
 
     pagination_class = DocumentPagination
+
+    filter_backends = [
+        DjangoFilterBackend
+    ]
+
+    filterset_class = DocumentFilter
     
 
 
