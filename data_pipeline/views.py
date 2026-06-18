@@ -28,6 +28,9 @@ from .serializers import (
 from django_filters.rest_framework import (
     DjangoFilterBackend
 )
+from rest_framework.filters import (
+    OrderingFilter
+)
 
 from .services.extractor import extract_text
 from .services.cleaner import clean_text
@@ -215,10 +218,22 @@ class DocumentListView(ListAPIView):
     pagination_class = DocumentPagination
 
     filter_backends = [
-        DjangoFilterBackend
+        DjangoFilterBackend,
+        OrderingFilter
     ]
 
     filterset_class = DocumentFilter
+
+    ordering_fields = [
+        "quality_score",
+        "uploaded_at",
+        "processing_time",
+        "file_size"
+    ]
+
+    ordering = [
+        "-uploaded_at"
+    ]
     
 
 
