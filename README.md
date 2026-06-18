@@ -133,6 +133,31 @@ GET /api/documents/?ordering=-uploaded_at
 
 ---
 
+# 🏗️ Project Structure
+
+```text
+data_pipeline/
+├── services/
+│   ├── cleaner.py
+│   ├── chunker.py
+│   ├── complexity_service.py
+│   ├── embeddings.py
+│   ├── extractor.py
+│   ├── language_detector.py
+│   ├── quality_service.py
+│   ├── search_service.py
+│   └── vector_store.py
+│
+├── filters.py
+├── pagination.py
+├── serializers.py
+├── views.py
+├── models.py
+└── urls.py
+```
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
