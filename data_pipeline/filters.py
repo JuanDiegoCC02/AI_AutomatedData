@@ -7,6 +7,10 @@ class DocumentFilter(
     django_filters.FilterSet
 ):
     
+    filename = django_filters.CharFilter(
+    field_name="filename",
+    lookup_expr="icontains"
+    )
 
     language = django_filters.CharFilter(
         lookup_expr="iexact"
