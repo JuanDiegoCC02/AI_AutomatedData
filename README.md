@@ -12,7 +12,7 @@ The system automatically extracts, analyzes, indexes, and retrieves information 
 
 ---
 
-# Author
+# Credits
 
 Juan Diego Corella Camacho
 
