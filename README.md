@@ -158,6 +158,34 @@ data_pipeline/
 
 ---
 
+# 📊 Current Capabilities
+
+* Semantic document search
+* Vector database integration
+* Quality evaluation metrics
+* Language identification
+* Complexity scoring
+* Pagination
+* Filtering
+* Ordering
+* Document deletion
+* OpenAPI documentation
+
+---
+
+# 🚧 Future Improvements
+
+* JWT Authentication
+* Docker Support
+* PostgreSQL Migration
+* User Ownership
+* OCR Integration
+* AI Summarization
+* CI/CD Pipelines
+* Cloud Deployment
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
