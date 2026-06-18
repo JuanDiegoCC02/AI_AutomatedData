@@ -12,6 +12,22 @@ The system automatically extracts, analyzes, indexes, and retrieves information 
 
 ---
 
+# 🚀 Overview
+
+This project provides an end-to-end document intelligence pipeline capable of:
+
+* Extracting text from PDF documents
+* Cleaning and preprocessing text
+* Detecting document language
+* Measuring text complexity
+* Generating semantic embeddings
+* Performing semantic search
+* Tracking processing quality metrics
+
+The platform stores document vectors in ChromaDB and exposes a REST API for document management and retrieval.
+
+---
+
 # Credits
 
 Juan Diego Corella Camacho
