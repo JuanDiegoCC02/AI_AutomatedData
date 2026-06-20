@@ -74,6 +74,61 @@ The platform stores document vectors in ChromaDB and exposes a REST API for docu
 
 ---
 
+# 🔧 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/JuanDiegoCC02/AIAutomated_Data.git
+cd AIAutomated_Data
+```
+
+## Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+## Activate Virtual Environment
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## Apply Database Migrations
+
+```bash
+python manage.py migrate
+```
+
+## Run Development Server
+
+```bash
+python manage.py runserver
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000/
+```
+
+---
+
 # 📡 API Endpoints
 
 ### Documents
