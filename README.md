@@ -1,4 +1,4 @@
-# 📘 AI Automated Data
+# 📝 AI Automated Data
 
 AI Automated Data is an AI-powered document processing and semantic search platform built with Django REST Framework, ChromaDB, and Sentence Transformers.
 
