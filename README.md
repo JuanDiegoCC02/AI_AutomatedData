@@ -235,9 +235,8 @@ http://127.0.0.1:8000/
 
 ---
 
+## 👨‍💻 Credits
 
-# Credits
+Author: **Juan Diego Corella Camacho**
 
-Juan Diego Corella Camacho
-
-Backend Developer | Full Stack Developer | Telecommunications & Systems Engineering
+-Full Stack Developer | Telecommunications and Software Technician
